@@ -1,16 +1,17 @@
 # template
 
-Template repository for `ctrl-research` projects.
+Template repository for `thanoslabs` projects.
 
 ## What's Included
 
 - **Renovate** — automated dependency updates for Docker, Go modules, and GitHub Actions
 - **Releases** — automatic SemVer bumps on merge to `main` via PR labels (`major`/`minor`/`patch`, default `patch`), plus manual dispatch for explicit versions
 - **Branch protection** — `main` requires PRs and review
-- **CODEOWNERS** — `@ctrl-research/reviewers` auto-requested for review
+- **CODEOWNERS** — `@thanoslabs/reviewers` auto-requested for review
 - **MIT License**
 - **.gitignore** — common exclusions for OS, IDE, build outputs, and secrets
 - **.tool-versions** — single source of truth for language/tool versions (asdf/mise compatible)
+- **Docs** — markdown in `docs/` built into a static site with [nebula-md](https://github.com/thanoslabs/nebula-md) and deployed to GitHub Pages (public repos only)
 
 ## Using This Template
 
@@ -19,6 +20,7 @@ Template repository for `ctrl-research` projects.
 3. Update `renovate.json` to configure managers and schedules for your project
 4. Enable the new repo in the Renovate GitHub App if using hosted Renovate
 5. Fill in the artifact build/publish TODO stub in `.github/workflows/release.yaml`
+6. For public repos, set **Settings → Pages → Source** to **GitHub Actions** so the docs site can deploy
 
 ## Renovate
 
@@ -41,16 +43,27 @@ Releases follow [SemVer](https://semver.org/) with bare `X.Y.Z` tags (no `v` pre
 
 Automation lives in `.github/workflows/release.yaml` (versioning, tag, GitHub release). Building and publishing artifacts (images, binaries) is project-specific — fill in the TODO stub in the workflow.
 
+## Docs
+
+Project documentation lives in `docs/` as Obsidian-flavoured markdown (frontmatter, `[[wikilinks]]`, callouts). On every push to `main` that touches `docs/`, `.github/workflows/docs.yaml` calls the reusable [nebula-md](https://github.com/thanoslabs/nebula-md) workflow to build a static site and deploy it to GitHub Pages.
+
+- **Public repos**: the site is built and deployed to GitHub Pages.
+- **Private repos**: the workflow is skipped — nothing is published.
+
+You can also trigger it manually via **Actions → Docs → Run workflow**.
+
 ## Files
 
 ```
 .
 ├── .github/
-│   ├── CODEOWNERS           # Auto-request review from @ctrl-research/reviewers
+│   ├── CODEOWNERS           # Auto-request review from @thanoslabs/reviewers
 │   ├── renovate-config.js   # Renovate platform config
 │   └── workflows/
+│       ├── docs.yaml        # Build docs/ with nebula-md, deploy to GitHub Pages (public repos)
 │       ├── release.yaml     # Label-driven SemVer release workflow
 │       └── renovate.yaml    # Renovate GitHub Action workflow
+├── docs/                   # Project documentation (markdown → nebula-md site)
 ├── .gitignore
 ├── .tool-versions          # Pinned language/tool versions (asdf/mise)
 ├── CONTRIBUTING.md

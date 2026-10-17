@@ -2,12 +2,13 @@
 
 ## Purpose
 
-GitHub template repository for bootstrapping `ctrl-research` projects. Provides Renovate-managed dependency updates, branch protection, CODEOWNERS, license, and standard `.gitignore` as a starting point — not a runnable application.
+GitHub template repository for bootstrapping `thanoslabs` projects. Provides Renovate-managed dependency updates, branch protection, CODEOWNERS, license, and standard `.gitignore` as a starting point — not a runnable application.
 
 ## Tech stack
 
 - **Renovate** for dependency updates (managers: `docker-compose`, `github-actions`, `gomod`)
-- **GitHub Actions** for the Renovate workflow
+- **GitHub Actions** for the Renovate, release, and docs workflows
+- **[nebula-md](https://github.com/thanoslabs/nebula-md)** for building `docs/` into a static markdown site
 - **MIT License**
 
 ## Structure
@@ -16,11 +17,13 @@ GitHub template repository for bootstrapping `ctrl-research` projects. Provides 
 .
 ├── .agents/                  # Agent instructions and skills
 ├── .github/
-│   ├── CODEOWNERS            # @ctrl-research/reviewers
+│   ├── CODEOWNERS            # @thanoslabs/reviewers
 │   ├── renovate-config.js    # Renovate platform config
 │   └── workflows/
+│       ├── docs.yaml         # nebula-md docs build + GitHub Pages deploy
 │       ├── release.yaml      # Label-driven SemVer release workflow
 │       └── renovate.yaml     # Renovate workflow
+├── docs/                     # Project documentation (markdown source for the docs site)
 ├── .tool-versions            # Pinned language/tool versions (asdf/mise)
 ├── AGENTS.md                 # Operational expectations for humans and AI agents
 ├── CONTRIBUTING.md
@@ -49,3 +52,10 @@ GitHub template repository for bootstrapping `ctrl-research` projects. Provides 
   - No label — defaults to a `patch` bump
 - **Manual releases**: a specific version may be cut manually by supplying an explicit `X.Y.Z` version tag when needed (e.g. via a manual workflow dispatch). This bypasses the label-based bump.
 - Release automation lives in `.github/workflows/release.yaml`: it computes the next version, tags, and creates the GitHub release. Building and publishing artifacts (images, binaries) is project-specific and left as a TODO stub in the workflow.
+
+## Docs
+
+- Project documentation lives in `docs/` as markdown and is the source for the project's docs site. Do not introduce another static site generator (MkDocs, Docusaurus, etc.) — docs are built with [nebula-md](https://github.com/thanoslabs/nebula-md).
+- `.github/workflows/docs.yaml` calls nebula-md's reusable workflow (`thanoslabs/nebula-md/.github/workflows/deploy.yml`) on pushes to `main` that touch `docs/`. Generation happens in CI only — do not commit built HTML.
+- Deployment to GitHub Pages runs only when the repository is **public**; private repos skip the job. Public repos must set **Settings → Pages → Source** to **GitHub Actions**.
+- Pages are Obsidian-flavoured markdown: YAML frontmatter (`title`, `tags`, `date`), `[[wikilinks]]` between pages, and callouts. `docs/index.md` is the site's landing page.
