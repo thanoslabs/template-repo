@@ -1,5 +1,13 @@
 # template
 
+[![CI](https://github.com/thanoslabs/template-repo/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/thanoslabs/template-repo/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/thanoslabs/template-repo?sort=semver&display_name=tag)](https://github.com/thanoslabs/template-repo/releases/latest)
+[![Docs](https://github.com/thanoslabs/template-repo/actions/workflows/docs.yaml/badge.svg?branch=main)](https://thanoslabs.github.io/template-repo/)
+[![Docs site](https://img.shields.io/badge/docs-GitHub%20Pages-blue?logo=github)](https://thanoslabs.github.io/template-repo/)
+[![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://github.com/thanoslabs/template-repo/pulls?q=is%3Apr+author%3Aapp%2Frenovate)
+[![SemVer](https://img.shields.io/badge/semver-2.0.0-blue)](https://semver.org/)
+[![License: MIT](https://img.shields.io/github/license/thanoslabs/template-repo)](LICENSE)
+
 Template repository for `thanoslabs` projects.
 
 ## What's Included
@@ -21,6 +29,7 @@ Template repository for `thanoslabs` projects.
 4. Enable the new repo in the Renovate GitHub App if using hosted Renovate
 5. Fill in the artifact build/publish TODO stub in `.github/workflows/release.yaml`
 6. For public repos, set **Settings → Pages → Source** to **GitHub Actions** so the docs site can deploy
+7. Replace `thanoslabs/template-repo` in the README badges with your repo's `owner/name` (and drop the docs site badge for private repos)
 
 ## Renovate
 
