@@ -2,7 +2,6 @@
 
 [![CI](https://github.com/thanoslabs/template-repo/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/thanoslabs/template-repo/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/thanoslabs/template-repo?sort=semver&display_name=tag)](https://github.com/thanoslabs/template-repo/releases/latest)
-[![Docs](https://github.com/thanoslabs/template-repo/actions/workflows/docs.yaml/badge.svg?branch=main)](https://thanoslabs.github.io/template-repo/)
 [![Docs site](https://img.shields.io/badge/docs-GitHub%20Pages-blue?logo=github)](https://thanoslabs.github.io/template-repo/)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://github.com/thanoslabs/template-repo/pulls?q=is%3Apr+author%3Aapp%2Frenovate)
 [![SemVer](https://img.shields.io/badge/semver-2.0.0-blue)](https://semver.org/)
